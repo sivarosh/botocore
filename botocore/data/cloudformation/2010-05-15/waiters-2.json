@@ -177,6 +177,31 @@
           "state": "failure"
         }
       ]
+    },
+    "StackDriftDetectionComplete": {
+      "delay": 10,
+      "operation": "DescribeStackDriftDetectionStatus",
+      "maxAttempts": 120,
+      "description": "Wait until stack drift detection status is DETECTION_COMPLETE.",
+      "acceptors": [
+        {
+          "argument": "DetectionStatus",
+          "expected": "DETECTION_COMPLETE",
+          "matcher": "path",
+          "state": "success"
+        },
+        {
+          "argument": "DetectionStatus",
+          "expected": "DETECTION_FAILED",
+          "matcher": "path",
+          "state": "failure"
+        },
+        {
+          "expected": "ValidationError",
+          "matcher": "error",
+          "state": "failure"
+        }
+      ]
     }
   }
 }
